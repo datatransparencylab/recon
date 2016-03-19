@@ -1,0 +1,82 @@
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#get-results, #download-csv {
+  margin-left: 10px;
+}
+
+.axis text {
+  font: 12px sans-serif;
+}
+
+.lineDefaultBlue {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke: blue;
+  stroke-dasharray: 4 4;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.lineDefaultGreen {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke: green;
+  stroke-dasharray: 4 4;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+/*.blueStroke{
+  stroke: blue;
+}*/
+
+.lineDefaultBlue.highlight {
+  stroke-dasharray: 1 0;
+  stroke-width: 3px;
+  stroke: red;
+}
+
+.lineDefaultGreen.highlight {
+  stroke-dasharray: 1 0;
+  stroke-width: 3px;
+  stroke: red;
+}
+
+.description {
+  text-align: left;
+  margin: 0 20px 20px;
+  font-size: 16px;
+}
+
+table {
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+h3, h4, h5, label {
+  margin-left: 5px;
+}
+
+h3 {
+  text-align: center;
+  font-size: 2em;
+  color: #88ced9;
+  margin-bottom: 1em;
+  margin-top: 0.333em;
+}
+
+
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
+body, navbar-text {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+  padding: 10px;
+}

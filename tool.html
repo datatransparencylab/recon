@@ -1,0 +1,123 @@
+---
+layout: default
+title: Recon Visualization Tool
+---
+  <hr>
+  <label for="selector-button-group" id="selector-label">Report:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="selector-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">Applications that leak PI</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="selector-button-dropdown">
+        <li><a href="#">Applications that leak PI</a></li>
+        <li><a href="#">Domains that receive PI</a></li>
+        <li><a href="#">Applications vs. Domains </a></li>
+        <li><a href="#">PI Categories</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="type-button-group" id="type-label">Type:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="type-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">Summary</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="type-button-dropdown">
+        <li><a href="#">Summary</a></li>
+        <li><a href="#">Detailed per category</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="platform-button-group" id="platform-label">Operating System:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="platform-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">All OS</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="platform-button-dropdown">
+        <li><a href="#">All OS</a></li>
+        <li><a href="#">Android</a></li>
+        <li><a href="#">iOS</a></li>
+        <li><a href="#">Windows</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="trackers-button-group" id="trackers-label">Type of Domains:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="trackers-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">Only Trackers</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="trackers-button-dropdown">
+        <li><a href="#">All Domains</a></li>
+        <li><a href="#">Only Trackers</a></li>
+        <li><a href="#">Only Non-Trackers</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="categories-button-group" id="categories-label">PI Categories:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="categories-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">All Categories</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="categories-button-dropdown">
+        <li><a href="#">All Categories</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="groupcategories-button-group" id="groupcategories-label">PI Categories:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="groupcategories-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">All Category Groups</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="groupcategories-button-dropdown">
+        <li><a href="#">All Category Groups</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <label for="details-button-group" id="details-label">Level of Detail:</label>
+  <div class="btn-group" role="group">
+    <div class="btn-group btn-group-sm" role="group" id="details-button-group">
+      <button type="button" class="btn btn-default dropdown-toggle" 
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="selection">Hide URLs</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="details-button-dropdown">
+        <li><a href="#">Show URLs</a></li>
+        <li><a href="#">Hide URLs</a></li>
+      </ul>
+    </div>
+
+    <div class="btn-group btn-group-sm pull-right" role="group">
+      <button type="button pull-right" class="btn btn-primary" id="download-csv">Download CSV!</button>
+    </div>
+    <div class="btn-group btn-group-sm pull-right" role="group">
+      <button type="button pull-right" class="btn btn-primary" id="get-results">Show Report!</button>
+    </div>
+  </div>
+  <hr>
+  <h3 class=' text-center' id='report-title'></h3>
+  <h5 class=' text-center' id='report-subtitle'></h5>
+  <div class="table-wide" id='table-container'></div>
