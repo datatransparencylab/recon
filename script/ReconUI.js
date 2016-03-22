@@ -17,8 +17,9 @@ ReconUI.prototype.registerButtons = function() {
 }
 
 ReconUI.prototype.registerButtonCsv = function() {
-  $('#download-csv').on('click', function() {
-    DataTable.exportTableToCSV($('#table-container'), csvFile());
+  $('#download-csv').on('click', {that: this}, function(e) {
+    var _that = e.data.that;
+    DataTable.exportTableToCSV($('#table-container'), _that.csvFile());
   });
 }
 
