@@ -91,53 +91,14 @@ var ReconData = function() {
   // List of Operating System to be assessed - TODO: are we using it in all the objects?
   this.oss = ["All", "iOS", "Android", "Windows"];
 
-  // List of Category Groups and Categories
-  this.CAT_GROUP_DESC = ["LOCATION", "CONTACT", "GENDER", "ID", "NAME", "CREDENTIAL"];
-  this.CAT_GROUPS = ["LOCATION", "CONTACT", "GENDER", "ID", "NAME", "CREDENTIAL"];
+  // List of Categories
   this.CATS = ["LOCATION", "X_WP_DEVICE_ID", "MUID", "X_WP_ANID", "LASTNAME",
     "ADVERTISERID", "ANDROIDID", "MACADDR", "SERIALNUMBER", "FIRSTNAME", "IMEI",
     "GENDER", "ZIPCODE", "USERNAME", "PASSWORD", "EMAIL", "CONTACTNAME", "IDFA",
     "DEVICENAME", "CONTACTNUMBER", "FULLNAME", "ADDRESS", "MEID", "DOB", "PSWD",
-    "PROFILE", "RELATIONSHIP"
-  ];
+    "PROFILE", "RELATIONSHIP"];
 
-  // Description of the Category Groups
-  /*this.CAT_GROUP_DESC = {
-    "LOCATION": "LOCATION",
-    "IDENTIFIERS": "IDENTIFIERS",
-    "PERSONAL_INFO": "PERSONAL_INFO"
-  };*/
-
-  // Mapping bewtween category and category group
-  /*this.CAT_VS_GROUP = {
-    "LOCATION": "LOCATION",
-    "X_WP_DEVICE_ID": "IDENTIFIERS",
-    "MUID": "IDENTIFIERS",
-    "X_WP_ANID": "IDENTIFIERS",
-    "LASTNAME": "PERSONAL_INFO",
-    "ADVERTISERID": "IDENTIFIERS",
-    "ANDROIDID": "IDENTIFIERS",
-    "MACADDR": "IDENTIFIERS",
-    "SERIALNUMBER": "IDENTIFIERS",
-    "FIRSTNAME": "PERSONAL_INFO",
-    "IMEI": "IDENTIFIERS",
-    "GENDER": "PERSONAL_INFO",
-    "ZIPCODE": "PERSONAL_INFO",
-    "USERNAME": "PERSONAL_INFO",
-    "PASSWORD": "PERSONAL_INFO",
-    "EMAIL": "PERSONAL_INFO",
-    "CONTACTNAME": "PERSONAL_INFO",
-    "IDFA": "IDENTIFIERS",
-    "DEVICENAME": "IDENTIFIERS",
-    "CONTACTNUMBER": "PERSONAL_INFO",
-    "FULLNAME": "PERSONAL_INFO",
-    "ADDRESS": "PERSONAL_INFO",
-    "MEID": "IDENTIFIERS",
-    "DOB": "PERSONAL_INFO",
-    "PSWD": "PERSONAL_INFO",
-    "PROFILE": "PERSONAL_INFO",
-    "RELATIONSHIP": "PERSONAL_INFO"
-  };*/
+  // Relationship between categories and category groups
   this.CAT_VS_GROUP = {
     "LOCATION": "LOCATION",
     "X_WP_DEVICE_ID": "ID",
@@ -167,6 +128,62 @@ var ReconData = function() {
     "PROFILE": "NAME",
     "RELATIONSHIP": "NAME"
   }
+
+  // List of Category Groups
+  this.CAT_GROUPS = ["LOCATION", "CONTACT", "GENDER", "ID", "NAME", "CREDENTIAL"];
+
+  // Description of the Category Groups
+  this.CAT_GROUP_DESC = {
+    "LOCATION": "Location Information",
+    "CONTACT": "Information about how to contact the user",
+    "GENDER": "Gender information about the user",
+    "ID": "Identifiers that are used to identify uniquely user/device",
+    "NAME": "Name of the user",
+    "CREDENTIAL": "Credentials of user, including passwords sent in plain text"
+  };
+
+  /*
+  // Mapping bewtween category and category group
+  this.CAT_VS_GROUP = {
+    "LOCATION": "LOCATION",
+    "X_WP_DEVICE_ID": "IDENTIFIERS",
+    "MUID": "IDENTIFIERS",
+    "X_WP_ANID": "IDENTIFIERS",
+    "LASTNAME": "PERSONAL_INFO",
+    "ADVERTISERID": "IDENTIFIERS",
+    "ANDROIDID": "IDENTIFIERS",
+    "MACADDR": "IDENTIFIERS",
+    "SERIALNUMBER": "IDENTIFIERS",
+    "FIRSTNAME": "PERSONAL_INFO",
+    "IMEI": "IDENTIFIERS",
+    "GENDER": "PERSONAL_INFO",
+    "ZIPCODE": "PERSONAL_INFO",
+    "USERNAME": "PERSONAL_INFO",
+    "PASSWORD": "PERSONAL_INFO",
+    "EMAIL": "PERSONAL_INFO",
+    "CONTACTNAME": "PERSONAL_INFO",
+    "IDFA": "IDENTIFIERS",
+    "DEVICENAME": "IDENTIFIERS",
+    "CONTACTNUMBER": "PERSONAL_INFO",
+    "FULLNAME": "PERSONAL_INFO",
+    "ADDRESS": "PERSONAL_INFO",
+    "MEID": "IDENTIFIERS",
+    "DOB": "PERSONAL_INFO",
+    "PSWD": "PERSONAL_INFO",
+    "PROFILE": "PERSONAL_INFO",
+    "RELATIONSHIP": "PERSONAL_INFO"
+  };
+  
+  // List of Category Groups
+  this.CAT_GROUPS = ["LOCATION", "IDENTIFIERS", "PERSONAL_INFO"];
+
+  // Description of the Category Groups
+  this.CAT_GROUP_DESC = { 
+    "LOCATION": "Information about the user loation",
+    "IDENTIFIERS": "Hardware or Software Identifiers to uniquely identify a user/device",
+    "PERSONAL_INFO": "Any Personal Information about the user"
+  };
+  */
 };
 
 
@@ -207,7 +224,7 @@ ReconParser.prototype.readJSON = function() {
 
         // for every category for this domain
         domainCategories.forEach(function(category) { 
-          // Need to find the category ID for the description provided
+          // Get the category ID for the description provided
           var categoryID = _this.getCategoryIDFromDesc(category);
 
           // Complete the list of categories with the domain info
@@ -228,7 +245,7 @@ ReconParser.prototype.readJSON = function() {
           _this.initDomainCategory(domainDetails.domainUrl, categoryID);
           // 2 - We fill-in the array 
           data.domains[domainDetails.domainUrl][categoryID][myApp.aid] = 
-            _this.createAppPerDomain(myApp, domainDetails.domainUrl, categoryID);
+           _this.createAppPerDomain(myApp, domainDetails.domainUrl, categoryID);
         }); // Finished processing a category, for a domain, for an application
         data.links.push(link);
       }) // Finished processing a domain for an application 
