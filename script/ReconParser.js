@@ -182,14 +182,11 @@ ReconParser.prototype.readJSON = function() {
     for (var i = 0; i < apps.length; i++) { // We analyse every App 
       myApp = _this.createApp(apps[i]); // Creates the app with the basic info
 
-      // As we don't have a list of categories we build a global one 
-      // we add all the catogies we find in every app
+      // Build a global list of categories aggregating the ones we find in apps
       _this.addAppCategoriesToGlobalList(apps[i]);
-     
-      // The information in the detail field is formatted with an HTML list that
-      // includes some fields separated by an arrow -> other by commas, others
-      // include the keyword tracking as free text. So all this magic is to
-      // convert that presentation ready info to something properly structured
+
+      // The information in the detail field is formatted with an HTML list 
+      // need to convert that presentation ready info to something structured
       html = $.parseHTML(apps[i].detail);
       // Array of domains that we need to complete for all the app info  
       var domainInfo = []
@@ -208,51 +205,51 @@ ReconParser.prototype.readJSON = function() {
 
         var link = _this.createLink(myApp, domainDetails);
 
-        // To make the things a bit more complicated, the categories we 
-        // obtained from the detail field are the description not the IDs
-        // so we need to get first the ID linked to the description and 
-        // only afterwards build our 2-d array:
-        domainCategories.forEach(function(category) {
+        // for every category for this domain
+        domainCategories.forEach(function(category) { 
+          // Need to find the category ID for the description provided
           var categoryID = _this.getCategoryIDFromDesc(category);
-          link.categories.push(categoryID);
 
+          // Complete the list of categories with the domain info
+          _this.addDomainInfoToCategoryList(categoryID, domainDetails, myApp);
+
+          // Add the category and category group to the app-domain link
+          link.categories.push(categoryID);
           if (link.categoryGroups.indexOf(data.CAT_VS_GROUP[categoryID]) == -1)
             link.categoryGroups.push(data.CAT_VS_GROUP[categoryID]);
 
-          // Now with the ID we can add it
+          // Now with the ID we can complete myApp information 
           if (myApp.categories[categoryID] == null)
             myApp.categories[categoryID] = [];
           myApp.categories[categoryID][domainDetails.domainUrl] = domainDetails;
 
-          // The remaining is to build the global 3D array that stores all the
-          // information per-domain rather than per-app, is kind of duplication
-          // but would make building visual staff easier. 
-
-          // Firstly we check for the existence of the structure and create it 
+          // Build the global 3D array that stores all the information perdomain
+          // 1 - We check for the existence of the structure and create it
           _this.initDomainCategory(domainDetails.domainUrl, categoryID);
-
-          // And then we fill-in the array 
-          data.domains[domainDetails.domainUrl][categoryID][myApp.aid] = _this.createAppPerDomain(myApp, domainDetails.domainUrl, categoryID);
-
-          // Lastly, we add the tracker information to the list of categories 
-          _this.addDomainInfoToCategoryList(categoryID, domainDetails, myApp);
-        });
+          // 2 - We fill-in the array 
+          data.domains[domainDetails.domainUrl][categoryID][myApp.aid] = 
+            _this.createAppPerDomain(myApp, domainDetails.domainUrl, categoryID);
+        }); // Finished processing a category, for a domain, for an application
         data.links.push(link);
-      }) // Finished processing the detail field
+      }) // Finished processing a domain for an application 
 
       myApp.domains = domainInfo;
       data.apps[myApp.aid] = myApp;
-    }
+    } // end of application parsing
 
-    ReconParser.ready = true;
-    ui.addCategoriesToDropdown();
-    getExampleVisualizations();
-
-    if (query.getQueryFromUrl()) {
-      ui.updateDropdowns();
-      $("#get-results").click();
-    }
+    _this.readyToShow();
   });
+}
+
+ReconParser.prototype.readyToShow = function() {
+  ReconParser.ready = true;
+  ui.addCategoriesToDropdown();
+  getExampleVisualizations();
+
+  if (query.getQueryFromUrl()) {
+    ui.updateDropdowns();
+    $("#get-results").click();
+  }
 }
 
 ReconParser.prototype.createApp = function(app) {
@@ -352,18 +349,12 @@ ReconParser.prototype.getCategoryIDFromDesc = function(description) {
   return categoryID;
 }
 
-ReconParser.prototype.addElement = function(list, element) {
- if (list.indexOf(element) == -1)
-   list.push(element);
-}
-
 ReconParser.prototype.addDomainDetailsToGlobalList = function(domainDetails) {
   if (domainDetails.tracker)
     data.trackers[domainDetails.domainUrl] = domainDetails;
   else
     data.nonTrackers[domainDetails.domainUrl] = domainDetails;
 }
-
 
 ReconParser.prototype.createAppPerDomain = function(app, domainUrl, categoryID) {
   return detailInfo = { aid: app.aid,
