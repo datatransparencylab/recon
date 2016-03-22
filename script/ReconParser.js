@@ -98,6 +98,7 @@ var ReconData = function() {
     "DEVICENAME", "CONTACTNUMBER", "FULLNAME", "ADDRESS", "MEID", "DOB", "PSWD",
     "PROFILE", "RELATIONSHIP"];
 
+  /*
   // Relationship between categories and category groups
   this.CAT_VS_GROUP = {
     "LOCATION": "LOCATION",
@@ -140,9 +141,9 @@ var ReconData = function() {
     "ID": "Identifiers that are used to identify uniquely user/device",
     "NAME": "Name of the user",
     "CREDENTIAL": "Credentials of user, including passwords sent in plain text"
-  };
+  };*/
 
-  /*
+  
   // Mapping bewtween category and category group
   this.CAT_VS_GROUP = {
     "LOCATION": "LOCATION",
@@ -183,7 +184,7 @@ var ReconData = function() {
     "IDENTIFIERS": "Hardware or Software Identifiers to uniquely identify a user/device",
     "PERSONAL_INFO": "Any Personal Information about the user"
   };
-  */
+  
 };
 
 
