@@ -48,7 +48,7 @@
 
 .description {
   text-align: left;
-  margin: 0 20px 20px;
+  margin: 0 20px 20px 5px;
   font-size: 16px;
 }
 
@@ -64,9 +64,10 @@ h3, h4, h5, label {
 h3 {
   text-align: center;
   font-size: 2em;
-  color: #88ced9;
+  color: white;
   margin-bottom: 1em;
   margin-top: 0.333em;
+  background-color:  #88ced9;
 }
 
 
@@ -79,4 +80,89 @@ body, navbar-text {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
   padding: 10px;
+  text-align: left;
+}
+
+
+/*importing style from dtl.org*/
+
+.center {
+  margin-left: 10px;
+  width: 90%;
+}
+.post-container{
+  /*width: 90% ;*/
+  padding: 2em;
+  background-color: #efefef;
+  color: #333;
+}
+.post-container h2{
+font-size: 2em;
+margin: 1em;
+
+
+}
+
+.intro-grants {
+
+
+}
+
+
+
+.post-body p{
+/*  max-width: 80%*/
+  margin: 0 20px 20px 5px;
+
+
+}
+.post-body a{
+   
+   border-bottom: 3px solid #7ab9ba;
+
+
+}
+
+.post-body a:hover{
+   
+/*   border-bottom: 3px solid #7ab9ba;*/
+   text-decoration: none;
+   color:#7ab9ba;
+  
+
+}
+
+
+
+.post-date{
+ 
+}
+
+.author{
+margin: .5em;
+  
+}
+
+.blurb{
+  margin: .5em;
+  color:#7ab9ba
+;
+  /*font-style: italic;*/
+  font-size: 1.2em;
+  padding-bottom: 10px;
+  text-indent: 10%;
+}
+
+.post-body{
+  width: 90%;
+  padding: 40px;
+  text-align: left;
+  background-color:white;
+  line-height:140%;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #7ab9ba;
+    border-color: transparent;
 }
