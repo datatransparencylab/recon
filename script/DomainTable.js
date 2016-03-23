@@ -27,11 +27,11 @@ DomainTable.prototype.createTable = function(){
   $('#' + this.container + ' table thead').append('<tr id="first-header"/>');
   if (this.myQuery.domains && this.myQuery.trackers) {
     $('#' + this.container + ' table thead tr')
-      .append('<th data-align="center" colspan=2> Domain Info </th>');
+      .append('<th data-align="center" colspan=2> Data-receiving Domain Info </th>');
   }
   else {
     $('#' + this.container + ' table thead tr')
-      .append('<th data-align="center" colspan=1> Domain Info </th>');
+      .append('<th data-align="center" colspan=1> Data-receiving Domain Info </th>');
   }
 
   $('#' + this.container + ' table thead tr')
