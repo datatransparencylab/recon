@@ -7,28 +7,25 @@ title: Recon Visualization Tool
     var page="index";
   </script>
 
-  <div class="container-fluid">
+  <div class="container-fluid post-body">
 
     <h3> What is Recon? </h3>
   <p class="description">
-    Recon is one of the projects that is supported by the DTL Grants program. 
-    It tries to provide users more transparency and control over the information
-    about them that is sent by their mobile applications and browsers to Internet. 
-    Currently, users install lot of applications on their smartphones, but
-    these devices give them no visibility into what information is being sent,
-    and who is receiving it. Recon solves this problem by providing users
-    an additional level of monitoring and possibilities to control which data is sent and
-    who is receiving this data.
+    The DTL Grants program is supporting <a href="http://recon.meddle.mobi/">ReCon</a>, a software project that provides users more transparency and control over the information
+    about them that is sent by their mobile applications to Internet.</p> 
+   <p>
+    Currently, users download many applications on their smartphones without knowing how their information is being sent and to who. Recon solves this problem by providing users
+    an additional level of monitoring and control on which data is sent and
+    who is receiving it.
   </p>
     <h3> How does Recon work? </h3>
   <p class="description">
-    Recon achieves this by analysing all the traffic that is sent by mobile
-    devices. Based on machine learning, it infers when specific pieces of personal
-    information leaks occur, based on contextual cues. 
-    This means that it detects when personal
-    information is shared with other parties without users active involvement.
+    Recon analyses all the traffic that is sent by mobile
+    devices and, through machine learning, it infers when privacy leaks occur
+    based on contextual clues. It detects when personal
+    information is shared with other parties without requiring users active involvement.
     The system has been trained with more than 1000 popular iOS and Android
-    apps and it keeps learning continuously while people use it.
+    apps and it continues learning as people use it.
   </p>
     <h3> What type of information leaks does Recon detect? </h3>
   <p class="description">
@@ -41,37 +38,35 @@ title: Recon Visualization Tool
   </p>
     <h3> How do I know where my information is sent? </h3>
   <p class="description">
-    The system also divides the leakages into two main categories depending on
-    whether the receiving party is a tracker or not. A tracker is a domain
-    linked to companies that are known to track online activity of users at
-    multiple domains, so they can create profiles of the users. There are many
-    public lists of trackers available, Recon has used the publicly available
-    <a href="http://pgl.yoyo.org/adservers/"> database </a> of tracker domains,
-    as well as recent research on mobile ads, to determine if a domain is a tracker or not.
-    The reason for categorizing the receiving domains in these two categories
-    (trackers/non-trackers) is because any leak that occurs to one of the
-    tracker domains is more risky for end-users privacy, as trackers tend to
-    accumulate different data from users and they can combine and exploit it
+    The system divides the leakages into two main categories, distinguishing
+    whether the receiving party is a tracker or not. </p>
+
+    <p>A tracker is a domain 
+    linked to companies that are known to track online activity of users across
+    multiple domains so they can create profiles of the users. There are many
+    public lists of trackers available, Recon has used a reference <a href="http://pgl.yoyo.org/adservers/"> list </a> to determine if a domain is a tracker or not.</p>
+    <p>
+    The researchers have distinguished between leaks going to trackers vs. those going to non-trackers because any leaks sent to 
+    tracker domains are more risky for end-users privacy, as trackers tend to
+    aggregate different data from users and they can combine and exploit it
     in multiple ways.
   </p>
-    <h3> Is there any way I can get what apps are leaking information?</h3>
+    <h3> Is there any way I can get a list of apps that are leaking information?</h3>
   <p class="description">
-    We have developed a visualization <a href="tool.html"> tool</a> on top of the information gathered by     Recon to
-    make it easier for anyone to understand which type of personal information is
-    sent, which applications do it, and which are the domains that receive it.
-    The tool allows to retrieve different types of insights, about the apps, 
-    domains and information that is leaked.
+DTL has developed a <a href="tool.html"> tool</a> on top of the information gathered by Recon to
+    make it easier for anyone to understand: i) the type of personal information that is
+    sent, ii) the applications that are doing it, and iii) what domains are receiving the leaked personal data.
+    The tool allows to gather different types of insights from the apps, domains and information that is leaked.
   </p>
   <p class="description">
-    For instance, the following graph shows which iPhone Applications (from the ones
-    analyised) are sending Location Information over the Internet to trackers. 
+    For instance, the following graph shows which iPhone Applications analyzed by ReCon are sending Location Information to trackers. 
   </p>
   <img class="table-narrow" src="images/bipartite.png">
   <p class="description">
-    In the graph, for instance, we can see how by using the Facebook application,
-    your location information is sent to 4 different trackers. We can also see
-    how some of these trackers (e.g. advertising.com) are not receiving  
-    your location only from Facebook but from other apps (e.g. Twitter in the example).
+   This graph shows that the Facebook app, when used, sent
+    a user's location information to <em>4 different trackers (doubleclick.net, adsvr.org, vdopia.com, and advertising.com)</em>. We can also see
+    how some of these trackers (<em>e.g.:</em>advertising.com) are receiving 
+    the user's location not only from Facebook but from other apps (Twitter in this example). The red line highlights the link between the Facebook iOS App to Advertising.com, which in turn is receiving information from the Twitter iOS App. 
   </p>
   <p class="description">
     Some other example graphics can be found at the <a href="examples.html"> examples </a> section.
