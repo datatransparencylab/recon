@@ -89,7 +89,7 @@ var ReconData = function() {
   this.links = [];
 
   // List of Operating System to be assessed - TODO: are we using it in all the objects?
-  this.oss = ["All", "iOS", "Android", "Windows"];
+  this.oss = ["All", "ios", "android", "windows"];
 
   // List of Categories
   this.CATS = ["LOCATION", "X_WP_DEVICE_ID", "MUID", "X_WP_ANID", "LASTNAME",
@@ -98,52 +98,6 @@ var ReconData = function() {
     "DEVICENAME", "CONTACTNUMBER", "FULLNAME", "ADDRESS", "MEID", "DOB", "PSWD",
     "PROFILE", "RELATIONSHIP"];
 
-  /*
-  // Relationship between categories and category groups
-  this.CAT_VS_GROUP = {
-    "LOCATION": "LOCATION",
-    "X_WP_DEVICE_ID": "ID",
-    "MUID": "ID",
-    "X_WP_ANID": "ID",
-    "LASTNAME": "NAME",
-    "ADVERTISERID": "ID",
-    "ANDROIDID": "ID",
-    "MACADDR": "ID",
-    "SERIALNUMBER": "ID",
-    "FIRSTNAME": "NAME",
-    "IMEI": "ID",
-    "GENDER": "GENDER",
-    "ZIPCODE": "LOCATION",
-    "USERNAME": "CREDENTIAL",
-    "PASSWORD": "CREDENTIAL",
-    "EMAIL": "CONTACT",
-    "CONTACTNAME": "NAME",
-    "IDFA": "ID",
-    "DEVICENAME": "ID",
-    "CONTACTNUMBER": "CONTACT",
-    "FULLNAME": "NAME",
-    "ADDRESS": "LOCATION",
-    "MEID": "ID",
-    "DOB": "NAME",
-    "PSWD": "CREDENTIAL",
-    "PROFILE": "NAME",
-    "RELATIONSHIP": "NAME"
-  }
-
-  // List of Category Groups
-  this.CAT_GROUPS = ["LOCATION", "CONTACT", "GENDER", "ID", "NAME", "CREDENTIAL"];
-
-  // Description of the Category Groups
-  this.CAT_GROUP_DESC = {
-    "LOCATION": "Location Information",
-    "CONTACT": "Information about how to contact the user",
-    "GENDER": "Gender information about the user",
-    "ID": "Identifiers that are used to identify uniquely user/device",
-    "NAME": "Name of the user",
-    "CREDENTIAL": "Credentials of user, including passwords sent in plain text"
-  };*/
-
-  
   // Mapping bewtween category and category group
   this.CAT_VS_GROUP = {
     "LOCATION": "LOCATION",
@@ -187,16 +141,19 @@ var ReconData = function() {
   
 };
 
-
 // RECON PARSER
 var ReconParser = function(file) {
-  this.jsonFile = file ? file : "recon-app-leaks-ok.json";
+  this.jsonFile = file ? file : "http://recon.meddle.mobi/json/data.json";
   this.ready = false;
 };
 
 ReconParser.prototype.readJSON = function() {
   _this = this;
-  $.getJSON(this.jsonFile, function(apps) {
+
+  $.getJSON(this.jsonFile, function(jsonp) {
+
+    apps = jsonp.data; 
+
     for (var i = 0; i < apps.length; i++) { // We analyse every App 
       myApp = _this.createApp(apps[i]); // Creates the app with the basic info
 
@@ -276,7 +233,7 @@ ReconParser.prototype.createApp = function(app) {
     appName: app.appName,
     score: app.score,
     popularity: app.popularity,
-    platform: app.platform,
+    platform: app.platform.toLowerCase(), // some versions of the json used caps
     categories: [], // still a placeholder 
     categoryGroups: [], // still a placeholder 
     domains: [] // placeholder too
@@ -301,10 +258,10 @@ ReconParser.prototype.addAppCategoriesToGlobalList = function(app) {
         data.categories[categoryID].arrayNonTrackers[os] = [];
       }
     }
-
-    if (data.categories[categoryID].arrayApps[app.platform].indexOf(app.appName) == -1) {
-        data.categories[categoryID].arrayApps[app.platform].push(app.appName);
-        data.categories[categoryID].arrayApps["All"].push(app.appName + "(" + myApp.platform + ")");
+    
+    if (data.categories[categoryID].arrayApps[app.platform.toLowerCase()].indexOf(app.appName) == -1) {
+        data.categories[categoryID].arrayApps[app.platform.toLowerCase()].push(app.appName);
+        data.categories[categoryID].arrayApps["All"].push(app.appName + "(" + app.platform.toLowerCase() + ")");
      }
   }
 }
@@ -337,7 +294,7 @@ ReconParser.prototype.createDomainDetails = function(domainUrl) {
 ReconParser.prototype.createLink = function(app, domain) {
   var link = { "app": app.appName,
                "domain": domain.domainUrl,
-               "platform": app.platform,
+               "platform": app.platform.toLowerCase(),
                "tracker": domain.tracker,
                "categories": [],
                "categoryGroups": []
@@ -379,7 +336,7 @@ ReconParser.prototype.createAppPerDomain = function(app, domainUrl, categoryID) 
                  appName: app.appName,
                  score: app.score,
                  popularity: app.popularity,
-                 platform: app.platform,
+                 platform: app.platform.toLowerCase(),
                  tracker: app.tracker,
                  url: domainUrl,
                  categoryGroup: data.CAT_VS_GROUP[categoryID]
@@ -476,7 +433,7 @@ function getExampleVisualizations() {
       domains: true,
       details: false,
       summary: false,
-      platform: "iOS",
+      platform: "ios",
       type: "Bipartite",
       noData: true,
       groupcategory: "All",
@@ -505,7 +462,7 @@ function getExampleVisualizations() {
       domains: true,
       details: false,
       summary: true,
-      platform: "iOS",
+      platform: "ios",
       type: "AppTable",
       noData: false
     };
