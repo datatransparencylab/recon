@@ -103,7 +103,7 @@ DomainTable.prototype.getDomainsColumns = function() {
                  switchable: false, formatter: "DomainTable.numberFormatter"});
 
   if (this.myQuery.platform == "All" ) {
-    counterKeys = data.oss.slice(1,4);
+    counterKeys = ["iOS", "Android", "Windows"];
     for (var i=0; i<counterKeys.length; i++) {
       columns.push({ label: counterKeys[i], key: "APPS_" + counterKeys[i],
                      halign: "center", align: "center", width: 200, 
@@ -119,7 +119,7 @@ DomainTable.prototype.getDomainsColumns = function() {
                   visible: true, switchable: true,
                  formatter: "DataTable.arrayFormatter"});
     if (this.myQuery.platform == "All" ) {
-      counterKeys = data.oss.slice(1,4);
+      counterKeys = ["iOS", "Android", "Windows"];
       for (var i=0; i<counterKeys.length; i++) {
         columns.push({label: counterKeys[i], key: "LIST_APPS_" + counterKeys[i],
                       halign: "center", align: "center", width: 200, 

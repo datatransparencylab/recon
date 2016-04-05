@@ -214,9 +214,9 @@ AppTable.prototype.getData = function() {
     // Ideally I would love to count always so the data is full and filter later
     // on when showing the results, but I've not found a way to do it with
     if ((_this.myQuery.platform == "All") || 
-        (((_this.myQuery.platform == "ios") && (app.platform == "ios")) ||
-         ((_this.myQuery.platform == "android") && (app.platform == "android")) ||
-           ((_this.myQuery.platform == "windows") && (app.platform == "windows")))) {
+        (((_this.myQuery.platform == "iOS") && (app.platform == "iOS")) ||
+         ((_this.myQuery.platform == "Android") && (app.platform == "Android")) ||
+           ((_this.myQuery.platform == "Windows") && (app.platform == "Windows")))) {
       var domainList = [];
       var trackerList = [];
       var domainCount = 0;
