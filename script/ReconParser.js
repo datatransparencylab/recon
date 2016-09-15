@@ -22,7 +22,7 @@ var ui;
 $(document).ready(function() {
   query = new ReconQuery();
   // Temporary hack, it seems CORS header are not sent by ReCon server
-  parser = new ReconParser("../recon-app-leaks-ok.json");
+  parser = new ReconParser("recon-app-leaks-ok.json");
   data = new ReconData();
   ui = new ReconUI();
   ui.registerButtons();
